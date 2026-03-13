@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1",
+    "name": "Ноутбук ASUS ROG",
+    "description": "Игровой ноутбук с RTX 3060",
+    "price": 120000,
+    "category": "electronics",
+    "inStock": true,
+    "imageUrl": null,
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  }
+]
