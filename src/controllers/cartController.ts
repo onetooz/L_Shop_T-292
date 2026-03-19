@@ -136,30 +136,6 @@ router.put('/update', async (req: AuthRequest, res: Response) => {
   }
 });
 
-router.delete('/remove/:productId', async (req: AuthRequest, res: Response) => {
-  try {
-    const users = await userDB.read();
-    const userIndex = users.findIndex((u: User) => u.id === req.userId);
-    
-    if (userIndex === -1) {
-      return res.status(404).json({ error: 'Пользователь не найден' });
-    }
-
-    const user = users[userIndex];
-    user.cart = user.cart.filter((item: CartItem) => item.productId !== req.params.productId);
-
-    users[userIndex] = user;
-    await userDB.write(users);
-
-    res.json({ 
-      message: 'Товар удалён из корзины',
-      cart: user.cart 
-    });
-  } catch (error) {
-    res.status(500).json({ error: 'Ошибка при удалении из корзины' });
-  }
-});
-
 router.post('/clear', async (req: AuthRequest, res: Response) => {
   try {
     const users = await userDB.read();
