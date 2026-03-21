@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "name": "Ноутбук ASUS ROG",
+    "description": "Игровой ноутбук с RTX 3060",
+    "price": 120000,
+    "category": "electronics",
+    "inStock": true,
+    "imageUrl": null,
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "name": "Смартфон Samsung Galaxy S24",
+    "description": "Флагманский смартфон с AMOLED‑дисплеем 120 Гц",
+    "price": 95000,
+    "category": "electronics",
+    "inStock": true,
+    "imageUrl": null,
+    "createdAt": "2024-02-10T12:00:00.000Z"
+  },
+  {
+    "id": "3",
+    "name": "Беспроводные наушники Sony WH-1000XM5",
+    "description": "Полноразмерные наушники с активным шумоподавлением",
+    "price": 38000,
+    "category": "accessories",
+    "inStock": true,
+    "imageUrl": null,
+    "createdAt": "2024-02-20T09:30:00.000Z"
+  },
+  {
+    "id": "4",
+    "name": "Игровая мышь Logitech G Pro X",
+    "description": "Лёгкая игровая мышь с настраиваемыми кнопками",
+    "price": 12000,
+    "category": "accessories",
+    "inStock": false,
+    "imageUrl": null,
+    "createdAt": "2024-03-01T14:15:00.000Z"
+  },
+  {
+    "id": "5",
+    "name": "Футболка L_Shop Logo",
+    "description": "Хлопковая футболка с логотипом магазина",
+    "price": 2500,
+    "category": "clothing",
+    "inStock": true,
+    "imageUrl": null,
+    "createdAt": "2024-03-05T11:00:00.000Z"
+  },
+  {
+    "id": "6",
+    "name": "Худи L_Shop Limited",
+    "description": "Тёплое худи лимитированной серии",
+    "price": 6200,
+    "category": "clothing",
+    "inStock": true,
+    "imageUrl": null,
+    "createdAt": "2024-03-06T16:45:00.000Z"
+  },
+  {
+    "id": "7",
+    "name": "Книга \"Чистый код\"",
+    "description": "Роберт Мартин, классика по разработке ПО",
+    "price": 3200,
+    "category": "books",
+    "inStock": true,
+    "imageUrl": null,
+    "createdAt": "2024-03-10T08:20:00.000Z"
+  },
+  {
+    "id": "8",
+    "name": "Книга \"Совершенный код\"",
+    "description": "Стив Макконнелл, продвинутая книга по разработке",
+    "price": 4100,
+    "category": "books",
+    "inStock": false,
+    "imageUrl": null,
+    "createdAt": "2024-03-12T13:10:00.000Z"
+  },
+  {
+    "id": "9",
+    "name": "Настольная лампа с регулировкой яркости",
+    "description": "Подходит для рабочего стола, мягкий свет",
+    "price": 2700,
+    "category": "home",
+    "inStock": true,
+    "imageUrl": null,
+    "createdAt": "2024-03-15T10:05:00.000Z"
+  },
+  {
+    "id": "10",
+    "name": "Игровая клавиатура с подсветкой",
+    "description": "Механическая клавиатура с RGB‑подсветкой",
+    "price": 14500,
+    "category": "electronics",
+    "inStock": true,
+    "imageUrl": null,
+    "createdAt": "2024-03-18T18:30:00.000Z"
+  }
+]

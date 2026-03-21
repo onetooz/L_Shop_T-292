@@ -1,0 +1,59 @@
+[
+  {
+    "id": "35bdcf2f-7846-4997-9dee-70dd53078d32",
+    "name": "Тестовый Пользователь",
+    "email": "test@test.com",
+    "login": "testuser",
+    "phone": "1234567890",
+    "password": "123456",
+    "createdAt": "2026-02-18T15:01:19.245Z",
+    "cart": [
+      {
+        "productId": "1",
+        "quantity": 1,
+        "addedAt": "2026-02-18T15:11:44.864Z"
+      },
+      {
+        "productId": "2",
+        "quantity": 1,
+        "addedAt": "2026-03-19T13:13:06.776Z"
+      },
+      {
+        "productId": "3",
+        "quantity": 1,
+        "addedAt": "2026-03-19T13:13:08.430Z"
+      }
+    ],
+    "deliveries": []
+  },
+  {
+    "id": "10dafdf6-1d5e-495f-a5e0-20dfd1b6e80a",
+    "name": "Новый Пользователь1",
+    "email": "newuser@test.com",
+    "login": "newuser",
+    "phone": "1234567890",
+    "password": "password123",
+    "createdAt": "2026-02-26T14:46:15.940Z",
+    "cart": []
+  },
+  {
+    "id": "fb00bbad-ebc1-4088-981c-1522885d84f2",
+    "name": "Иван",
+    "email": "lic@gmail.com",
+    "login": "Mga_Archer",
+    "phone": "+375446667890",
+    "password": "123",
+    "createdAt": "2026-02-26T14:53:03.383Z",
+    "cart": []
+  },
+  {
+    "id": "78fd56a9-0510-45c3-887d-cf527859d6c3",
+    "name": "Новый Пользователь1",
+    "email": "newusвамитмсвчсмимсчer@test.com",
+    "login": "Лох",
+    "phone": "1234567890",
+    "password": "password123",
+    "createdAt": "2026-03-03T16:16:32.897Z",
+    "cart": []
+  }
+]

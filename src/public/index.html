@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L_Shop - Интернет-магазин</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFDF5;
+            color: #1F1F1F;
+            line-height: 1.5;
+        }
+    
+        /* Современный хедер с градиентом */
+        header {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFFDF5 100%);
+            border-bottom: 2px solid #D6D0C2;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 253, 245, 0.9);
+        }
+    
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1F1F1F 0%, #97C2EC 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            letter-spacing: -0.5px;
+        }
+    
+        nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+    
+        nav a {
+            text-decoration: none;
+            color: #1F1F1F;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+    
+        nav a:hover {
+            background: #D6D0C2;
+            color: #1F1F1F;
+            transform: translateY(-1px);
+        }
+    
+        nav a.active {
+            background: #97C2EC;
+            color: #1F1F1F;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(151, 194, 236, 0.3);
+        }
+    
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+    
+        .cart-count {
+            background: #1F1F1F;
+            color: #FFFDF5;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+    
+        /* Современные кнопки */
+        button {
+            background: #1F1F1F;
+            color: #FFFDF5;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+    
+        button:hover {
+            background: #97C2EC;
+            color: #1F1F1F;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(151, 194, 236, 0.4);
+        }
+    
+        button.secondary {
+            background: #D6D0C2;
+            color: #1F1F1F;
+        }
+    
+        button.secondary:hover {
+            background: #97C2EC;
+            border-color: #1F1F1F;
+        }
+    
+        button.danger {
+            background: #1F1F1F;
+            color: #FFFDF5;
+            border: 1px solid #D6D0C2;
+        }
+    
+        button.danger:hover {
+            background: #D6D0C2;
+            color: #1F1F1F;
+        }
+    
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    
+        /* Современные формы */
+        .form-container {
+            max-width: 450px;
+            margin: 3rem auto;
+            background: #FFFFFF;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -10px rgba(31, 31, 31, 0.1);
+            border: 1px solid #D6D0C2;
+        }
+    
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+    
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1F1F1F;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #D6D0C2;
+            border-radius: 16px;
+            font-size: 1rem;
+            background: #FFFDF5;
+            transition: all 0.3s ease;
+        }
+    
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #97C2EC;
+            box-shadow: 0 0 0 4px rgba(151, 194, 236, 0.2);
+            background: #FFFFFF;
+        }
+    
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+    
+        /* Карточки товаров в современном стиле */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+    
+        .product-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px -5px rgba(31, 31, 31, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #D6D0C2;
+            position: relative;
+            overflow: hidden;
+        }
+    
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #97C2EC, #D6D0C2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 40px -15px rgba(151, 194, 236, 0.4);
+        }
+    
+        .product-card:hover::before {
+            opacity: 1;
+        }
+    
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #D6D0C2 0%, #FFFDF5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1F1F1F;
+            font-weight: 500;
+        }
+    
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            letter-spacing: -0.5px;
+        }
+    
+        .product-title:hover {
+            color: #97C2EC;
+        }
+    
+        .product-description {
+            color: #1F1F1F;
+            opacity: 0.7;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+    
+        .product-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1F1F1F;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+    
+        .product-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+    
+        .quantity-input {
+            width: 70px;
+            padding: 0.7rem;
+            border: 2px solid #D6D0C2;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 600;
+            background: #FFFDF5;
+        }
+    
+        .stock-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    
+        .in-stock {
+            background: #D6D0C2;
+            color: #1F1F1F;
+        }
+    
+        .out-of-stock {
+            background: #1F1F1F;
+            color: #FFFDF5;
+        }
+    
+        /* Современные фильтры */
+        .filters {
+            background: #FFFFFF;
+            padding: 2rem;
+            border-radius: 28px;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            align-items: end;
+            border: 1px solid #D6D0C2;
+            box-shadow: 0 10px 30px -10px rgba(31, 31, 31, 0.05);
+        }
+    
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    
+        .filter-group label {
+            font-weight: 600;
+            color: #1F1F1F;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    
+        .filter-group input, .filter-group select {
+            padding: 0.8rem;
+            border: 2px solid #D6D0C2;
+            border-radius: 16px;
+            width: 100%;
+            background: #FFFDF5;
+            transition: all 0.3s ease;
+        }
+    
+        .filter-group input:focus, .filter-group select:focus {
+            border-color: #97C2EC;
+            box-shadow: 0 0 0 3px rgba(151, 194, 236, 0.2);
+            outline: none;
+        }
+    
+        /* Корзина в современном стиле */
+        .cart-container {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px -10px rgba(31, 31, 31, 0.1);
+            border: 1px solid #D6D0C2;
+        }
+    
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 2px solid #D6D0C2;
+        }
+    
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+    
+        .cart-item-info {
+            flex: 2;
+        }
+    
+        .cart-item-title {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+        }
+    
+        .cart-item-price {
+            color: #1F1F1F;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+    
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+    
+        .cart-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+    
+        .cart-quantity button {
+            padding: 0.3rem 1rem;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+    
+        .cart-total {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 3px solid #D6D0C2;
+            text-align: right;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1F1F1F;
+            letter-spacing: -0.5px;
+        }
+    
+        /* Современные уведомления */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 30px;
+            padding: 1.2rem 2rem;
+            border-radius: 20px;
+            color: #FFFDF5;
+            animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            font-weight: 500;
+            box-shadow: 0 15px 30px -5px rgba(31, 31, 31, 0.3);
+            backdrop-filter: blur(10px);
+        }
+    
+        .notification.success {
+            background: #1F1F1F;
+            border-left: 5px solid #97C2EC;
+        }
+    
+        .notification.error {
+            background: #1F1F1F;
+            border-left: 5px solid #D6D0C2;
+        }
+    
+        .notification.info {
+            background: #1F1F1F;
+            border-left: 5px solid #97C2EC;
+        }
+    
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+    
+        /* Современное модальное окно */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(31, 31, 31, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+    
+        .modal-content {
+            background: #FFFDF5;
+            padding: 2.5rem;
+            border-radius: 32px;
+            max-width: 550px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid #D6D0C2;
+            box-shadow: 0 40px 60px -20px rgba(31, 31, 31, 0.4);
+        }
+    
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+    
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #1F1F1F;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+    
+        .modal-close:hover {
+            background: #D6D0C2;
+            transform: rotate(90deg);
+        }
+    
+        .message {
+            text-align: center;
+            padding: 4rem;
+            color: #1F1F1F;
+            opacity: 0.7;
+            font-size: 1.2rem;
+        }
+    
+        .error-message {
+            color: #1F1F1F;
+            background: #D6D0C2;
+            padding: 1rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+    
+        .success-message {
+            color: #1F1F1F;
+            background: #97C2EC;
+            padding: 1rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+    
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: #1F1F1F;
+            opacity: 0.7;
+            font-size: 1.2rem;
+            position: relative;
+        }
+    
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #D6D0C2;
+            border-top-color: #97C2EC;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    
+        @keyframes spin {
+            to { transform: translateX(-50%) rotate(360deg); }
+        }
+    
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .filters {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+            }
+    
+            .form-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+    
+            .cart-container {
+                padding: 1.5rem;
+            }
+        }
+    
+        /* Дополнительные улучшения */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+            color: #1F1F1F;
+            position: relative;
+            display: inline-block;
+        }
+    
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #97C2EC, #D6D0C2);
+            border-radius: 4px;
+        }
+    
+        a {
+            color: #1F1F1F;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+    
+        a:hover {
+            color: #97C2EC;
+        }
+    
+        ::selection {
+            background: #97C2EC;
+            color: #1F1F1F;
+        }
+        /* Современные выпадающие списки (Select) */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231F1F1F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2rem;
+    padding-right: 2.8rem !important;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+select:hover {
+    border-color: #97C2EC;
+    background-color: #FFFFFF;
+}
+
+select:focus {
+    border-color: #97C2EC;
+    box-shadow: 0 0 0 4px rgba(151, 194, 236, 0.2);
+    outline: none;
+    background-color: #FFFFFF;
+}
+
+select option {
+    background-color: #FFFDF5;
+    color: #1F1F1F;
+    padding: 1rem;
+    font-weight: 400;
+}
+
+select option:hover {
+    background-color: #97C2EC;
+}
+
+select option:checked {
+    background-color: #D6D0C2;
+    color: #1F1F1F;
+    font-weight: 600;
+}
+
+/* Стили для select в фильтрах */
+.filters select {
+    background-color: #FFFDF5;
+    border: 2px solid #D6D0C2;
+    border-radius: 16px;
+    padding: 0.8rem 2.8rem 0.8rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #1F1F1F;
+    transition: all 0.3s ease;
+}
+
+/* Стили для select в формах */
+.form-group select {
+    background-color: #FFFDF5;
+    border: 2px solid #D6D0C2;
+    border-radius: 16px;
+    padding: 0.8rem 2.8rem 0.8rem 1rem;
+    font-size: 1rem;
+    color: #1F1F1F;
+    width: 100%;
+}
+
+/* Выпадающие списки в корзине (если появятся) */
+.cart-container select {
+    background-color: #FFFDF5;
+    border: 2px solid #D6D0C2;
+    border-radius: 12px;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    font-size: 0.95rem;
+}
+
+/* Стили для disabled select */
+select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #D6D0C2;
+    border-color: #D6D0C2;
+}
+
+/* Кастомный скроллбар для длинных выпадающих списков */
+select[size], select[multiple] {
+    background-image: none;
+    padding-right: 1rem !important;
+    overflow-y: auto;
+}
+
+select[size] option, select[multiple] option {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    margin: 2px 0;
+}
+
+select[size] option:hover, select[multiple] option:hover {
+    background-color: #97C2EC;
+    color: #1F1F1F;
+}
+
+select[size] option:checked, select[multiple] option:checked {
+    background-color: #D6D0C2;
+    color: #1F1F1F;
+    font-weight: 600;
+}
+
+/* Анимация появления выпадающего списка */
+@keyframes selectDropdown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Для браузеров, поддерживающих ::picker() */
+select:focus-visible {
+    outline: none;
+}
+
+/* Стили для optgroup */
+optgroup {
+    background-color: #FFFDF5;
+    color: #1F1F1F;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1rem;
+}
+
+optgroup option {
+    padding-left: 2rem;
+    font-weight: 400;
+    text-transform: none;
+}
+
+/* Мультиселект */
+select[multiple] {
+    min-height: 120px;
+    border-radius: 16px;
+    padding: 0.5rem !important;
+    background-image: none;
+}
+
+select[multiple] option {
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    margin: 2px 0;
+}
+
+/* Стилизация для Firefox */
+@-moz-document url-prefix() {
+    select {
+        text-indent: 0.01px;
+        text-overflow: '';
+    }
+    
+    select:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 #1F1F1F;
+    }
+}
+
+/* Убираем стандартную стрелку в IE */
+select::-ms-expand {
+    display: none;
+}
+
+/* Дополнительные стили для select в разных состояниях */
+select.valid {
+    border-color: #1F1F1F;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231F1F1F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+select.invalid {
+    border-color: #1F1F1F;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231F1F1F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+}
+
+/* Группа с иконкой и select */
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.select-wrapper select {
+    width: 100%;
+}
+
+.select-wrapper .select-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #1F1F1F;
+    opacity: 0.7;
+}
+
+/* Темная тема для select (если понадобится) */
+.select-dark {
+    background-color: #1F1F1F;
+    color: #FFFDF5;
+    border-color: #D6D0C2;
+}
+
+.select-dark option {
+    background-color: #1F1F1F;
+    color: #FFFDF5;
+}
+
+/* Анимированный select */
+.select-animated {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.select-animated:hover {
+    transform: scale(1.02);
+}
+
+/* Select с меткой */
+.select-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #1F1F1F;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Маленький select */
+.select-sm {
+    padding: 0.4rem 2.2rem 0.4rem 0.8rem !important;
+    font-size: 0.85rem;
+    border-radius: 12px;
+}
+
+/* Большой select */
+.select-lg {
+    padding: 1rem 3rem 1rem 1.2rem !important;
+    font-size: 1.1rem;
+    border-radius: 20px;
+}
+
+/* Select с рамкой-градиентом */
+.select-gradient {
+    border: double 2px transparent;
+    background-image: linear-gradient(#FFFDF5, #FFFDF5), 
+                      linear-gradient(135deg, #97C2EC, #D6D0C2);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border-radius: 16px;
+}
+
+.select-gradient option {
+    background-color: #FFFDF5;
+}
+
+/* Select с тенью */
+.select-shadow {
+    box-shadow: 0 4px 10px rgba(151, 194, 236, 0.2);
+}
+
+.select-shadow:hover {
+    box-shadow: 0 6px 15px rgba(151, 194, 236, 0.3);
+}
+
+/* Кастомный дропдаун (если захотите заменить стандартный) */
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-dropdown select {
+    width: 100%;
+}
+
+.custom-dropdown::after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.2rem;
+    height: 1.2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231F1F1F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+
+.custom-dropdown select:focus + ::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Адаптивность для select */
+@media (max-width: 768px) {
+    select {
+        padding: 0.7rem 2.5rem 0.7rem 0.8rem !important;
+        font-size: 16px; /* Предотвращаем зум на iOS */
+    }
+    
+    .select-lg {
+        padding: 0.9rem 2.8rem 0.9rem 1rem !important;
+    }
+    
+    select[size] option, select[multiple] option {
+        padding: 0.7rem;
+    }
+}
+
+/* Стили для iOS устройств */
+@supports (-webkit-touch-callout: none) {
+    select {
+        font-size: 16px !important;
+    }
+}
+
+/* Анимация при открытии select */
+select:active {
+    transform: scale(0.98);
+}
+
+/* Select с иконкой слева */
+.select-with-icon {
+    padding-left: 2.8rem !important;
+    background-position: left 1rem center, right 1rem center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231F1F1F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='16' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='8' x2='12.01' y2='8'%3E%3C/line%3E%3C/svg%3E"), 
+                      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231F1F1F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat, no-repeat;
+    background-position: left 1rem center, right 1rem center;
+    background-size: 1.2rem, 1.2rem;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="router.navigate('/')">L_Shop</div>
+        <nav>
+            <a onclick="router.navigate('/')" data-page="home">Главная</a>
+            <a onclick="router.navigate('/cart')" data-page="cart">
+                Корзина
+                <span class="cart-count" id="cartCount" style="display: none;">0</span>
+            </a>
+        </nav>
+        <div class="user-info" id="userInfo">
+            <span id="userName"></span>
+            <button id="authBtn" onclick="handleAuth()">Войти</button>
+        </div>
+    </header>
+
+    <main id="app"></main>
+
+    <template id="home-page">
+        <div>
+            <h1>Товары</h1>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Поиск</label>
+                    <input type="text" id="searchInput" placeholder="Поиск по названию...">
+                </div>
+                
+                <div class="filter-group">
+                    <label>Категория</label>
+                    <select id="categorySelect">
+                        <option value="">Все категории</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Цена от</label>
+                    <input type="number" id="minPrice" placeholder="От">
+                </div>
+                
+                <div class="filter-group">
+                    <label>Цена до</label>
+                    <input type="number" id="maxPrice" placeholder="До">
+                </div>
+                
+                <div class="filter-group">
+                    <label>Наличие</label>
+                    <select id="inStockSelect">
+                        <option value="">Все</option>
+                        <option value="true">В наличии</option>
+                        <option value="false">Нет в наличии</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Сортировка</label>
+                    <select id="sortSelect">
+                        <option value="">По умолчанию</option>
+                        <option value="price_asc">Цена (возрастание)</option>
+                        <option value="price_desc">Цена (убывание)</option>
+                        <option value="name_asc">Название (А-Я)</option>
+                        <option value="name_desc">Название (Я-А)</option>
+                    </select>
+                </div>
+                
+                <button onclick="productsPage.applyFilters()">Применить</button>
+            </div>
+            
+            <div id="productsGrid" class="products-grid"></div>
+        </div>
+    </template>
+
+    <template id="cart-page">
+        <div class="cart-container">
+            <h1>Корзина</h1>
+            <div id="cartItems"></div>
+            <div id="cartTotal" class="cart-total"></div>
+            <div style="text-align: right; margin-top: 1rem;">
+                <button onclick="cartPage.clearCart()" class="secondary" style="margin-right: 1rem;">Очистить корзину</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="login-page">
+        <div class="form-container" data-registration="form">
+            <h2>Вход</h2>
+            <div id="loginError" class="error-message"></div>
+            <div class="form-group">
+                <label>Логин или Email</label>
+                <input type="text" id="loginUsername" placeholder="Введите логин или email">
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" id="loginPassword" placeholder="Введите пароль">
+            </div>
+            <button onclick="authPage.login()" style="width: 100%; margin-bottom: 1rem;">Войти</button>
+            <p style="text-align: center;">
+                Нет аккаунта? <a onclick="router.navigate('/register')" style="color: #2563eb; cursor: pointer;">Зарегистрироваться</a>
+            </p>
+        </div>
+    </template>
+
+    <template id="register-page">
+        <div class="form-container" data-registration="form">
+            <h2>Регистрация</h2>
+            <div id="registerError" class="error-message"></div>
+            <div class="form-group">
+                <label>Имя</label>
+                <input type="text" id="registerName" placeholder="Введите имя">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="registerEmail" placeholder="Введите email">
+            </div>
+            <div class="form-group">
+                <label>Логин</label>
+                <input type="text" id="registerLogin" placeholder="Введите логин">
+            </div>
+            <div class="form-group">
+                <label>Телефон</label>
+                <input type="tel" id="registerPhone" placeholder="Введите телефон">
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" id="registerPassword" placeholder="Введите пароль">
+            </div>
+            <button onclick="authPage.register()" style="width: 100%; margin-bottom: 1rem;">Зарегистрироваться</button>
+            <p style="text-align: center;">
+                Уже есть аккаунт? <a onclick="router.navigate('/login')" style="color: #2563eb; cursor: pointer;">Войти</a>
+            </p>
+        </div>
+    </template>
+
+    <template id="product-detail-page">
+        <div id="productDetail"></div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
